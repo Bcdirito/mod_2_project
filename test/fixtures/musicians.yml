@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  genre: MyString
+  band_members: MyString
+  bio: MyString
+  img_url: MyString
+  rating: 1
+
+two:
+  name: MyString
+  genre: MyString
+  band_members: MyString
+  bio: MyString
+  img_url: MyString
+  rating: 1
