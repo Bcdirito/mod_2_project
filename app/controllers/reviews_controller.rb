@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     end
 
     def create
-      @review = Review.new(user_params)
+      @review = Review.new(review_params)
       @review.save
       redirect_to review_path(@review)
     end
