@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
 
     def new
       @review = Review.new
+      @musicians = Musician.all
     end
 
     def create
@@ -19,6 +20,7 @@ class ReviewsController < ApplicationController
 
     def edit
     @review = Review.find(params[:id])
+    @musicians = Musician.all
   end
 
   def update
@@ -39,3 +41,4 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:rating, :user_id, :profile_id, :content)
     end
   end
+
