@@ -1,10 +1,11 @@
 class MusiciansController < ApplicationController
-    def index
-    @musicians = Musician.all
-    end
+  def index
+  @musicians = Musician.all
+  end
 
   def new
-    @musician = Musician.all
+    @musician = Musician.new
+    @genres = Genre.all
   end
 
   def show
@@ -12,6 +13,7 @@ class MusiciansController < ApplicationController
   end
 
   def create
+    byebug
     @musician = Musician.new(musician_params)
 
     if @musician.valid?
@@ -25,6 +27,7 @@ class MusiciansController < ApplicationController
 
   def edit
     @musician = Musician.find(params[:id])
+    @genres = Genre.all
   end
 
   def update
@@ -47,6 +50,6 @@ class MusiciansController < ApplicationController
   private
 
   def musician_params
-    params.require(:musician).permit(:name, :genre, :band_members, :bio, :image, :rate)
+    params.require(:musician).permit(:name, :genres, :band_members, :bio, :image, :rate)
   end
 end

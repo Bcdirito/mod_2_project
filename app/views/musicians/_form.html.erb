@@ -1,12 +1,9 @@
-<h1> Edit Musician Account </h1>
-
-
-<% form_for @musician do |f| %>
+<%= form_for musician do |f| %>
 <%= f.label :name %>
 <%= f. text_field :name %>
 
-<%= f.label :genre %>
-<%= f. text_field :genre %>
+<%= f.label :genres %>
+<%= f.collection_check_boxes :genres, @genres, :id, :name%>
 
 <%= f.label :band_members%>
 <%= f. text_field :band_members %>
@@ -17,8 +14,5 @@
 <%= f.label :image %>
 <%= f. text_field :image %>
 
-<%= f.label :rate %>
-<%= f. text_field :rate %>
-
 <%= f.submit %>
-<%= end %>
+<% end %>
