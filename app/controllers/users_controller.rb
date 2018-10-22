@@ -12,10 +12,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    byebug
+    if params[:user][:password] != params[:user][:password_confirmation]
+      @user = User.new
+      flash[:message] = "Password did not match confirmation"
+      redirect_to new_user_path
+      return
+    end
+
     @user = User.new(user_params)
-    @user.save
-    redirect_to user_path(@user)
+
+    if @user.valid?
+      @user.save
+      redirect_to user_path(@user)
+    else
+      render :new
+    end
   end
 
   def edit

@@ -1,14 +1,24 @@
-<%= form_for user, url: '/users' do |f| %>
+<% if !flash[:message].empty? %>
+  <strong><%= flash[:message] %></strong>
+<% end %>
+<br>
 
-  First Name: <%= f.text_field :first_name %>
+<%= form_for user do |f| %>
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
   <br>
-  Last Name: <%= f.text_field :last_name %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
   <br>
-  User Name: <%= f.text_field :user_name %>
+  <%= f.label :user_name %>
+  <%= f.text_field :user_name %>
   <br>
-  Password: <%= f.password_field :password %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
   <br>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
   <br>
   <%= f.submit "Submit" %>
 
