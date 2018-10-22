@@ -1,16 +1,4 @@
-User 
-
-// show.html.erb
-
-<h1> User Profile: <%= @user.user_name %> </h1>
-<h3> Name: <%= "#{@user.first_name} " "#{@user.last_name}" %> </h3>
-
-
-// new.html.erb
-
-<h1>Signup!</h1>
-
-<%= form_for :user, url: '/users' do |f| %>
+<%= form_for user, url: '/users' do |f| %>
 
   First Name: <%= f.text_field :first_name %>
   <br>
@@ -25,9 +13,3 @@ User
   <%= f.submit "Submit" %>
 
 <% end %>
-
-// index.html.erb
-
-<h1> <% @users.each do |user| %> <h1>
-      <%= user.user_name %>
-      <% end %>
