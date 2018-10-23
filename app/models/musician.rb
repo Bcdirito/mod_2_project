@@ -4,6 +4,9 @@ class Musician < ApplicationRecord
   has_many :users, through: :review
 
   validates :genre, presence: true
+  validates :name, presence: true
+  validates :bio, presence: true
+
 
   def average_rating
     if self.reviews.count == 0

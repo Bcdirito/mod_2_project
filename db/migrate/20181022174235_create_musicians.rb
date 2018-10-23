@@ -6,7 +6,7 @@ class CreateMusicians < ActiveRecord::Migration[5.2]
       t.string :band_members
       t.string :bio
       t.string :image
-      t.integer :rate
+      t.float :rate
 
       t.timestamps
     end

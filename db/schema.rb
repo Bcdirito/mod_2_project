@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_181019) do
     t.string "band_members"
     t.string "bio"
     t.string "image"
-    t.integer "rate"
+    t.float "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
