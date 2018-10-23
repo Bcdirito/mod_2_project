@@ -46,7 +46,6 @@ class MusiciansController < ApplicationController
 
     if @musician.update(musician_params)
       if !@genres.empty?
-        byebug
         @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
       end
       redirect_to musician_path(@musician)
