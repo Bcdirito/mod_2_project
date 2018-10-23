@@ -8,6 +8,9 @@ class UsersController < ApplicationController
   end
 
   def new
+    if !session[:user_id].nil?
+      log_out
+    end
     @user = User.new
   end
 
@@ -23,6 +26,7 @@ class UsersController < ApplicationController
 
     if @user.valid?
       @user.save
+      log_in(@user)
       redirect_to user_path(@user)
     else
       render :new

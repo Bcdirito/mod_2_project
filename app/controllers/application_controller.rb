@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
 
+  def welcome
+    render :layout => "welcome"
+  end
 
   private
   # Logs in the given user.
@@ -10,6 +13,5 @@ class ApplicationController < ActionController::Base
     # Logs out the current user.
     def log_out
       session.delete(:user_id)
-      @current_user = nil
     end
 end

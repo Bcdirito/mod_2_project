@@ -1,7 +1,8 @@
 class MusiciansController < ApplicationController
 
   def index
-    @musicians = Musician.all
+    @musicians = Musician.search(params[:search])
+    byebug
   end
 
   def new
@@ -69,6 +70,6 @@ class MusiciansController < ApplicationController
   private
 
   def musician_params
-    params.require(:musician).permit(:name, :genre_ids, :band_members, :bio, :image, :rate)
+    params.require(:musician).permit(:name, :genre_ids, :band_members, :bio, :image, :rate, :search)
   end
 end

@@ -18,7 +18,6 @@ class User < ApplicationRecord
   end
 
   def authenticate(plaintext_password)
-    byebug
     BCrypt::Password.new(self.password_digest) == plaintext_password
   end
 

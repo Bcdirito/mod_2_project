@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
 
     def create
       @review = Review.new(review_params)
+      @review.user_id = session[:user_id]
       @review.save
       redirect_to review_path(@review)
     end
@@ -42,6 +43,6 @@ class ReviewsController < ApplicationController
   private
 
     def review_params
-      params.require(:review).permit(:rating, :user_id, :profile_id, :content)
+      params.require(:review).permit(:rating, :user_id, :musician_id, :content)
     end
   end

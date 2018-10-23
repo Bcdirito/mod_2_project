@@ -17,4 +17,17 @@ class Musician < ApplicationRecord
     end
     self.rate
   end
+
+  def self.search(search)
+    if search
+      musician = Musician.find_by(name: search)
+      if musician
+        self.where(id: musician.id)
+      else
+        Musician.all
+      end
+    else
+      Musician.all
+    end
+  end
 end
