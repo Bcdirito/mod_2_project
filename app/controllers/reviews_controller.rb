@@ -8,6 +8,9 @@ class ReviewsController < ApplicationController
     end
 
     def new
+      if session[:user_id].nil?
+        redirect_to "/login"
+      end
       @review = Review.new
       @musicians = Musician.all
     end
