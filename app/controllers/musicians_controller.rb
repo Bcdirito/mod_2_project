@@ -10,12 +10,10 @@ class MusiciansController < ApplicationController
 
   def show
     @musician = Musician.find(params[:id])
-    byebug
   end
 
   def create
     @musician = Musician.new(musician_params)
-    byebug
 
     if @musician.valid?
       @musician.save
@@ -45,7 +43,13 @@ class MusiciansController < ApplicationController
 
   def destroy
     @musician = Musician.find(params[:id])
+    Review.all.each do |review|
+      if @musician.id == review.musician_id
+        review.destroy
+      end
+    end
     @musician.destroy
+    redirect_to "/"
   end
 
   private

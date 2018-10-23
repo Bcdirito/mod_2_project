@@ -41,8 +41,13 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    Review.all.each do |review|
+      if @user.id == review.user_id
+        review.destroy
+      end
+    end
     @user.destroy
-    redirect_to user_path
+    redirect_to "/"
   end
 
 
