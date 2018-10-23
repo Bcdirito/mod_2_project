@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class User < ApplicationRecord
   has_many :reviews
   has_many :musicians, through: :reviews
@@ -13,6 +15,11 @@ class User < ApplicationRecord
 
   def password=(value)
     self.password_digest = BCrypt::Password.create(value)
+  end
+
+  def authenticate(plaintext_password)
+    byebug
+    BCrypt::Password.new(self.password_digest) == plaintext_password
   end
 
   def create
