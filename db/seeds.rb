@@ -33,7 +33,7 @@ User.create(first_name: "Arren", last_name: "Alexander", password: "password", p
 
 Musician.create(name: "Brian Detlefs", genre: "Singer/Songwriter", band_members: nil, bio: "Singer/Songwriter from Seattle. Loves Prince." image: nil rate: 0)
 Musician.create(name: "Anthony Pagano", genre: "Singer/Songwriter", band_members: nil, bio: "Singer/Songwriter from Florida. Loves John Mayer" image: nil rate: 4)
-Musician.create(name: "Kyle Motsinger", genre: ["Pop", "Alternative"], band_members: nil, bio: "Singer/Songwriter from Illinois. Loves Scissor Sisters." image: nil rate: 3.5)
+Musician.create(name: "That Band", genre: ["Pop", "Alternative"], band_members: ["Some Guy 1", "Some Guy 2", "Some Girl 1", "Some Girl 2"], bio: "Singer/Songwriter from Illinois. Loves Scissor Sisters." image: nil rate: 3.5)
 Musician.create(name: "Catherine Greenfield", genre: "Folk", band_members: nil, bio: "Singer/Songwriter from Seattle. Loves Folk." image: nil rate: 2 )
 Musician.create(name: "John Arthur Greene", genre: ["Pop", "Rock"] band_members: nil, bio: "Singer/Songwriter from Seattle. Loves Prince." image: nil rate: 5)
 
