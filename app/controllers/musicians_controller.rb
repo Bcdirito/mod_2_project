@@ -21,8 +21,9 @@ class MusiciansController < ApplicationController
 
     if @musician.valid?
       @musician.save
-      byebug
-      @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
+      if !@genres.empty?
+        @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
+      end
       redirect_to musician_path(@musician)
     else
       render :new
@@ -37,10 +38,17 @@ class MusiciansController < ApplicationController
 
   def update
     @musician = Musician.find(params[:id])
+    @genres = params[:musician][:genre]
+    @genres.shift
 
+    @musgens = MusicianGenre.where(musician_id: @musician.id)
+    @musgens.delete_all
 
-    if @musician.valid?
-      @musician.update(musician_params)
+    if @musician.update(musician_params)
+      if !@genres.empty?
+        byebug
+        @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
+      end
       redirect_to musician_path(@musician)
     else
       render :edit
