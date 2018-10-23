@@ -1,12 +1,15 @@
 class SessionsController < ApplicationController
   def new
+    if !session.empty?
+      session.clear
+    end
   end
 
   def create
     byebug
     @user = User.find_or_create_by(user_name: params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+      log_in(@user)
       redirect_to user_path(@user)
     else
       flash[:message] = "Invalid Username/Password"
@@ -15,6 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete :user_id
+    log_out
+    redirect_to "/"
   end
 end

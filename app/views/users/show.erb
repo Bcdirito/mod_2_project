@@ -1,4 +1,5 @@
 <h1>Welcome <%= @user.user_name.titleize %> !</h1>
 <h3> Name: <%= "#{@user.first_name} #{@user.last_name}" %> </h3>
 
-<%= link_to "Delete Profile", @user, method: "delete" %>
+<%= button_to "Delete Profile", @user, method: "delete" %>
+<%= button_to "Log Out", "/logout", method: "delete" %>
