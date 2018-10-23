@@ -16,10 +16,11 @@ ActiveRecord::Schema.define(version: 2018_10_22_181019) do
     t.string "name"
   end
 
-  create_table "genres_musicians", id: false, force: :cascade do |t|
-    t.integer "musician_id", null: false
-    t.integer "genre_id", null: false
-    t.index ["musician_id", "genre_id"], name: "index_genres_musicians_on_musician_id_and_genre_id"
+  create_table "musician_genres", force: :cascade do |t|
+    t.integer "musician_id"
+    t.integer "genre_id"
+    t.index ["genre_id"], name: "index_musician_genres_on_genre_id"
+    t.index ["musician_id"], name: "index_musician_genres_on_musician_id"
   end
 
   create_table "musicians", force: :cascade do |t|

@@ -1,3 +1,4 @@
 class Genre < ApplicationRecord
-  has_and_belongs_to_many :musicians
+  has_many :musiciangenres
+  has_many :musicians, through: :musiciangenres
 end

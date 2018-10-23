@@ -1,9 +1,9 @@
 class Musician < ApplicationRecord
-  has_and_belongs_to_many :genres
+  has_many :musiciangenres
+  has_many :genres, through: :musiciangenres
   has_many :reviews
   has_many :users, through: :review
 
-  validates :genre, presence: true
   validates :name, presence: true
   validates :bio, presence: true
 

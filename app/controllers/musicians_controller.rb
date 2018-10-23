@@ -10,13 +10,19 @@ class MusiciansController < ApplicationController
 
   def show
     @musician = Musician.find(params[:id])
+    @genres = MusicianGenre.all.select {|genre| @musician.id = genre.musician_id}
+    @genres = @genres.map {|genre| Genre.find(genre.genre_id).name}
   end
 
   def create
     @musician = Musician.new(musician_params)
+    @genres = params[:musician][:genre]
+    @genres.shift
 
     if @musician.valid?
       @musician.save
+      byebug
+      @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
       redirect_to musician_path(@musician)
     else
       render :new
