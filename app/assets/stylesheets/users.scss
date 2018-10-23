@@ -1,3 +1,25 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 {
+  text-align: center;
+  
+}
+h3 {
+  margin: 0 150px;
+}
+form {
+  margin: 0 100px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+}
+label {
+  font-size: 20px;
+}
+body {
+  background-color: #c741f4;
+}

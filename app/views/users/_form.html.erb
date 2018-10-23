@@ -1,25 +1,25 @@
-<% if !flash[:message].empty? %>
+<% if flash[:message] %>
   <strong><%= flash[:message] %></strong>
 <% end %>
 <br>
 
 <%= form_for user do |f| %>
 
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-  <br>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-  <br>
-  <%= f.label :user_name %>
-  <%= f.text_field :user_name %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <br>
-  <%= f.submit "Submit" %>
+  <ul><%= f.label :first_name %>:
+  <%= f.text_field :first_name %></ul>
+
+  <ul><%= f.label :last_name %>:
+  <%= f.text_field :last_name %></ul>
+
+  <ul><%= f.label :user_name %>:
+  <%= f.text_field :user_name %></ul>
+
+  <ul><%= f.label :password %>:
+  <%= f.password_field :password %></ul>
+
+  <ul><%= f.label :password_confirmation %>:
+  <%= f.password_field :password_confirmation %></ul>
+  
+  <ul><%= f.submit "Submit" %></ul>
 
 <% end %>

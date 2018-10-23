@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def create
     if params[:user][:password] != params[:user][:password_confirmation]
-      @user = User.new
+      # @user = User.new
       flash[:message] = "Password did not match confirmation"
       redirect_to new_user_path
       return
