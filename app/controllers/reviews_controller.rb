@@ -19,21 +19,21 @@ class ReviewsController < ApplicationController
     end
 
     def edit
-    @review = Review.find(params[:id])
-    @musicians = Musician.all
-  end
+      @review = Review.find(params[:id])
+      @musicians = Musician.all
+    end
 
-  def update
-    @review = Review.find(params[:id])
-    @review.update(user_params)
-    redirect_to review_path(@review)
-  end
+    def update
+      @review = Review.find(params[:id])
+      @review.update(user_params)
+      redirect_to review_path(@review)
+    end
 
-  def destroy
-    @review = Review.find(params[:id])
-    @review.destroy
-    redirect_to review_path(@review)
-  end
+    def destroy
+      @review = Review.find(params[:id])
+      @review.destroy
+      redirect_to review_path(@review)
+    end
 
   private
 
@@ -41,4 +41,3 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:rating, :user_id, :profile_id, :content)
     end
   end
-

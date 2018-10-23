@@ -1,6 +1,6 @@
 class MusiciansController < ApplicationController
   def index
-  @musicians = Musician.all
+    @musicians = Musician.all
   end
 
   def new
@@ -10,11 +10,12 @@ class MusiciansController < ApplicationController
 
   def show
     @musician = Musician.find(params[:id])
+    byebug
   end
 
   def create
-    byebug
     @musician = Musician.new(musician_params)
+    byebug
 
     if @musician.valid?
       @musician.save
@@ -50,6 +51,6 @@ class MusiciansController < ApplicationController
   private
 
   def musician_params
-    params.require(:musician).permit(:name, :genres, :band_members, :bio, :image, :rate)
+    params.require(:musician).permit(:name, :genre_ids, :band_members, :bio, :image, :rate)
   end
 end

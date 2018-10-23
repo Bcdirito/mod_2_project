@@ -1,0 +1,13 @@
+<h1><%= @musician.name  %></h1>
+
+<h3>Avg. Rating <%= @musician.average_rating %></h3>
+
+<% if !@musician.band_members.nil? %>
+  <ul>
+    <% @musican.band_members.each do |member|%>
+    <%= member %>
+  </ul>
+  <% end %>
+<% end %>
+
+<p><%= @musician.bio %></p>
