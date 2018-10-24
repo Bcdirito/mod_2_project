@@ -10,6 +10,11 @@ class MusiciansController < ApplicationController
   end
 
   def show
+    if id_checker(params[:id]) == true
+      redirect_to musicians_path
+      flash[:message] = "Invalid URL Path"
+      return
+    end
     @musician = Musician.find(params[:id])
     review_info(@musician)
     @genres = MusicianGenre.all.select {|genre| @musician.id = genre.musician_id}
@@ -72,5 +77,11 @@ class MusiciansController < ApplicationController
 
   def musician_params
     params.require(:musician).permit(:name, :genre_ids, :band_members, :bio, :image, :rate, :search)
+  end
+
+  def id_checker(id)
+    if id.to_i == 0 || id.to_i > Musician.last.id
+      return true
+    end
   end
 end

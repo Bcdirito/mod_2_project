@@ -1,12 +1,10 @@
 class ReviewsController < ApplicationController
     def index
-      if session[:review_class] == "musician"
-        @reviews = Review.musician_filter(session[:review_id])
-      elsif session[:review_class] == "user"
-        @reviews = Review.user_filter(session[:review_id])
-      else
+      @reviews = Review.rev_search(session[:review_class], session[:review_id])
+      if session[:review_class] != "musician" && session[:review_id].nil?
         redirect_to musicians_path
-        flash[:message] = "Visit Musician or Profile page first."
+        flash[:message] = "Please Vist a musician to see reviews"
+        return
       end
     end
 

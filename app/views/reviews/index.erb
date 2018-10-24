@@ -1,7 +1,17 @@
-<% if !@reviews.empty? && !session[:user_id].nil? %>
-  <% if session[:review_class] == "musician" %>
-    <%= render partial: "musician_reviews", locals: {reviews: @reviews} %>
+<% if session[:review_class] == "musician" %>
+  <% if !@reviews.nil? %>
+      <%= render partial: "reviews/musician_reviews", locals: {musician_reviews: @reviews} %>
   <% else %>
-    <%= render partial: "user_reviews", locals: {reviews: @reviews}  %>
+      <%= "No Reviews for this Artist yet." %>
   <% end %>
+<% elsif session[:review_class] == "user" && !session[:user_id].nil? %>
+  <% if !@reviews.nil? %>
+    <%= render partial: "reviews/user_reviews", locals: {user_reviews: @reviews}  %>
+  <% else %>
+    <%= "No Reviews for this Artist yet." %>
+  <% end %>
+<% else %>
+  <% redirect_to musicians_path %>
 <% end %>
+
+<%= button_to "Write New Review", new_review_path, method: "get" %>

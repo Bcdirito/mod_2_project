@@ -1,4 +1,7 @@
 <h1> Musician Home Page </h1>
+<% if !flash[:message].nil? %>
+  <strong> <%= flash[:message] %></strong> <br></br>
+<% end %>
 
 <% @musicians.each do |musician| %>
   <%= musician.name %>

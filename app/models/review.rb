@@ -2,15 +2,12 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :musician
 
-  def self.user_filter(user_id)
-    user = User.find(user_id)
-    reviews = Review.all.select {|rev| rev.user_id == user.id}
-    reviews
-  end
-
-  def self.musician_filter(musician_id)
-    musician = Musician.find(musician_id)
-    reviews = Review.all.select {|rev| rev.user_id == musician.id}
+  def self.rev_search(review_class, review_id)
+    if review_class == "musician"
+      reviews = Review.all.select {|rev| rev.musician_id == review_id}
+    elsif review_class == "user"
+      reviews = Review.all.select {|rev| rev.user_id == review_id}
+    end
     reviews
   end
 end

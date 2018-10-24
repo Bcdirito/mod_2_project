@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   # Logs out the current user.
   def log_out
     session.delete(:user_id)
+    session.delete(:review_class)
+    session.delete(:review_id)
   end
 
   def review_info(profile)
@@ -22,6 +24,5 @@ class ApplicationController < ActionController::Base
       session[:review_class] = "user"
     end
       session[:review_id] = profile.id
-      byebug
   end
 end

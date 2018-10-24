@@ -12,11 +12,11 @@
    <%= csrf_meta_tags %>
    <%= csp_meta_tag %>
 
-   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
    <nav class="navbar navbar-custom">
 
- <div class="container">
+ <div class="navigation">
    <div class="navbar-header">
      <a class="navbar-brand" href="#0">HighNote</a>
    </div>
@@ -26,12 +26,11 @@
      <li><a href="/users/show">Profile</a></li>
      <li><a href="/login">Login</a></li>
    </ul>
-   <form>
-   <%= form_tag(musicians_path, method: :get, class: 'navbar-form navbar-right') do %>
+   <%= form_tag(musicians_path, method: :get, class: 'navbar-form navbar-right search-form') do %>
  <%= text_field_tag :search, params[:search], class: 'form', placeholder: 'Search'  %>
  <%= submit_tag "Search", class: 'btn btn-default', :name => nil %>
 <% end %>
-           </form>
+
        </div>
  </div>
 </nav>
