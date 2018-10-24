@@ -2,3 +2,5 @@
 
 
 <%= render partial: "musicians/form", locals: {musician: @musician} %>
+
+<%= button_to "Delete Profile", @musician, method: "delete" %>

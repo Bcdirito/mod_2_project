@@ -4,12 +4,19 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    if !session[:user_id].nil?
+      @user = User.find(session[:user_id])
+      @reviews = @user.recent_reviews
+      render :show
+    else
+      redirect_to "/login"
+    end
   end
 
   def new
     if !session[:user_id].nil?
       log_out
+      flash[:message] = "You have been logged out."
     end
     @user = User.new
   end

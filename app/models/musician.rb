@@ -18,6 +18,19 @@ class Musician < ApplicationRecord
     self.rate
   end
 
+  def recent_reviews
+    reviews = self.reviews
+    if !reviews.empty?
+      recent_reviews = reviews.sort_by {|k, v| [:updated_at]}
+      if recent_reviews.count >= 3
+        recent_reviews = recent_reviews[-3..-1]
+      end
+    else
+      recent_reviews = reviews
+    end
+    recent_reviews
+  end
+
   def self.search(search)
     if search
       musician = Musician.find_by(name: search)

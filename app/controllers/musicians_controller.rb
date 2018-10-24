@@ -14,6 +14,7 @@ class MusiciansController < ApplicationController
     @musician = Musician.find(params[:id])
     @genres = MusicianGenre.all.select {|genre| @musician.id = genre.musician_id}
     @genres = @genres.map {|genre| Genre.find(genre.genre_id).name}
+    @reviews = @musician.recent_reviews
   end
 
   def create

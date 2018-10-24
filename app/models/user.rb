@@ -31,6 +31,19 @@ class User < ApplicationRecord
     end
   end
 
+  def recent_reviews
+    reviews = self.reviews
+    if !reviews.empty?
+      recent_reviews = reviews.sort_by {|k, v| [:updated_at]}
+      if recent_reviews.count >= 3
+        recent_reviews = recent_reviews[-3..-1]
+      end
+    else
+      recent_reviews = reviews
+    end
+    recent_reviews
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :user_name, :password, :password_confirmation)
   end
