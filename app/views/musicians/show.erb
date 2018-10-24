@@ -20,18 +20,4 @@
 <p><%= @musician.bio %></p>
 
 <h3>Recent Reviews:</h3>
-<% if !@reviews.empty? %>
-  <ul>
- <% @reviews.each do |review| %>
-    By: <%= "#{review.user.user_name} - #{review.rating}/5"%>
-  <% if review.content.length > 50 %>
-    <li><%= "#{review.content[0..50]}..." %><br></br></li>
-    <% else %>
-    <li><%= review.content %><br></br></li>
-    <% end %>
-  <% end %>
-  </ul>
- <% else %>
-  <%= "No Reviews Yet! Be the first to review!" %>
-  <%= button_to "Create New Review", new_review_path, method: "create" %>
-<% end %>
+<%= render partial: "reviews/recent_reviews", locals: {reviews: @reviews} %>
