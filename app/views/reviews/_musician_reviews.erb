@@ -1,0 +1,6 @@
+<ul>
+  <% reviews.each do |review| %>
+    <h4>By: <%= "#{review.user.user_name} - #{review.rating}/5"%></h4>
+    <li><%= review.content %><br></br></li>
+  <% end %>
+</ul>

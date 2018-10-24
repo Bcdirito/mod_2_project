@@ -1,0 +1,7 @@
+<ul>
+  <% reviews.each do |review| %>
+    <h4>For: <%= link_to "#{review.musician.name}", musician_path(review.musician)%> <%=" - #{review.rating}/5"%></h4>
+    <li><%= review.content %><br></br></li>
+    <%= button_to "Edit Review", @review, method: "edit" %>
+  <% end %>
+</ul>

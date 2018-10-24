@@ -21,3 +21,4 @@
 
 <h3>Recent Reviews:</h3>
 <%= render partial: "reviews/recent_reviews", locals: {reviews: @reviews} %>
+<%= button_to "See All Reviews", reviews_path, method: "get" %>

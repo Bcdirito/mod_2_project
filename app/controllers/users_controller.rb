@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
     if !session[:user_id].nil?
       @user = User.find(session[:user_id])
-      @reviews = @user.recent_reviews
+      review_info(@user)
       render :show
     else
       redirect_to "/login"

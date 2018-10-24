@@ -14,4 +14,14 @@ class ApplicationController < ActionController::Base
   def log_out
     session.delete(:user_id)
   end
+
+  def review_info(profile)
+    if profile.class == Musician
+      session[:review_class] = "musician"
+    elsif profile.class == User
+      session[:review_class] = "user"
+    end
+      session[:review_id] = profile.id
+      byebug
+  end
 end

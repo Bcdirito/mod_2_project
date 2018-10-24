@@ -2,7 +2,6 @@ class MusiciansController < ApplicationController
 
   def index
     @musicians = Musician.search(params[:search])
-    byebug
   end
 
   def new
@@ -12,6 +11,7 @@ class MusiciansController < ApplicationController
 
   def show
     @musician = Musician.find(params[:id])
+    review_info(@musician)
     @genres = MusicianGenre.all.select {|genre| @musician.id = genre.musician_id}
     @genres = @genres.map {|genre| Genre.find(genre.genre_id).name}
     @reviews = @musician.recent_reviews

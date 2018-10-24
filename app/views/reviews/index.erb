@@ -1,0 +1,7 @@
+<% if !@reviews.empty? && !session[:user_id].nil? %>
+  <% if session[:review_class] == "musician" %>
+    <%= render partial: "musician_reviews", locals: {reviews: @reviews} %>
+  <% else %>
+    <%= render partial: "user_reviews", locals: {reviews: @reviews}  %>
+  <% end %>
+<% end %>
