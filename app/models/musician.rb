@@ -8,7 +8,7 @@ class Musician < ApplicationRecord
   validates :bio, presence: true
 
   has_secure_password
-  
+
   def new
   end
 
@@ -41,7 +41,7 @@ class Musician < ApplicationRecord
 
   def self.search(search)
     if search
-      musician = Musician.find_by(name: search)
+      musician = Musician.find {|mus| mus.name.downcase == search.downcase}
       if musician
         self.where(id: musician.id)
       else

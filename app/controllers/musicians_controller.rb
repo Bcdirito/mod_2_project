@@ -1,4 +1,6 @@
 class MusiciansController < ApplicationController
+  before_action :musician_logged, only: [:edit, :update]
+
   def index
     @musicians = Musician.search(params[:search])
     if @musicians.count == 1
@@ -15,7 +17,7 @@ class MusiciansController < ApplicationController
   def show
     if id_checker(params[:id]) == true
       redirect_to musicians_path
-      flash[:message] = "Invalid URL Path"
+      flash[:message] = "Invalid URL Path. Musician Does Not Exist"
       return
     end
     @musician = Musician.find(params[:id])

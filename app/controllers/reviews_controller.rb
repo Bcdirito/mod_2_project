@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
     end
 
     def new
-      if session[:user_id].nil?
+      if session[:listener_id].nil?
         redirect_to "/login"
       end
       @review = Review.new

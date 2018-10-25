@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :invalid_url
+  
   def welcome
     render :layout => "welcome"
   end
@@ -14,6 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   # Logs out the current user.
+  def invalid_url
+    if !params[:not_found].nil?
+      flash[:message] = "Invalid Path. Path Does Not Exist."
+    end
+  end
+
   def log_out
     if !session[:listener_id].nil?
       session.delete(:listener_id)
