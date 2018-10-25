@@ -52,9 +52,13 @@ class MusiciansController < ApplicationController
   end
 
   def update
-    @musician = Musician.find(params[:id])
+    @musician = Musician.find(session[:musician_id])
     @genres = params[:musician][:genre]
     @genres.shift
+
+    if !params[:musician][:image].nil?
+      @musician.image_uploader(params[:musician][:image])
+    end
 
     @musgens = MusicianGenre.where(musician_id: @musician.id)
     @musgens.delete_all
