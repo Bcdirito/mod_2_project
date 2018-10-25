@@ -1,7 +1,7 @@
 <% if !reviews.empty? %>
   <ul>
  <% reviews.each do |review| %>
-    By: <%= "#{review.user.user_name} - #{review.rating}/5"%>
+    By: <%= "#{review.listener.user_name} - #{review.rating}/5"%>
   <% if review.content.length > 50 %>
     <li><%= "#{review.content[0..50]}..." %><br></br></li>
     <% else %>

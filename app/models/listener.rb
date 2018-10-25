@@ -21,6 +21,14 @@ class Listener < ApplicationRecord
     BCrypt::Password.new(self.password_digest) == plaintext_password
   end
 
+  def image_uploader(image)
+    byebug
+    if !image.nil?
+      pic = Cloudinary::Uploader.upload(image)
+      self.picture = pic['url']
+    end
+  end
+
   # def create
   #   user = User.new(user_params)
   #   if user.save

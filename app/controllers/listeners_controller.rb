@@ -1,12 +1,9 @@
 class ListenersController < ApplicationController
+  before_action :listener_logged, only: [:show, :edit, :update, :destroy]
+
   def show
-    if !session[:listener_id].nil?
-      @listener = Listener.find(session[:listener_id])
-      review_info(@listener)
-      render :show
-    else
-      redirect_to "/login"
-    end
+    @listener = Listener.find(session[:listener_id])
+    review_info(@listener)
   end
 
   def new
@@ -24,10 +21,8 @@ class ListenersController < ApplicationController
       return
     end
 
-    @listener = Listener.new(user_params)
-    byebug
-    img = Cloudinary::Uploader.upload(params[:listener][:picture])
-    @listener.picture = img['url']
+    @listener = Listener.new(listener_params)
+    @listener.image_uploader(params[:listener][:picture])
     if @listener.valid?
       @listener.save
       log_in_listener(@listener)
@@ -39,7 +34,7 @@ class ListenersController < ApplicationController
   end
 
   def edit
-    @listener = Listener.find(params[:id])
+    @listener = Listener.find()
   end
 
   def update
@@ -49,14 +44,14 @@ class ListenersController < ApplicationController
       img = Cloudinary::Uploader.upload(params[:listener][:picture])
       @listener.picture = img['url']
     end
-    @listener.update(user_params)
-    redirect_to user_path(@listener)
+    @listener.update(listener_params)
+    redirect_to listener_path(@listener)
   end
 
   def destroy
     @listener = Listener.find(params[:id])
     Review.all.each do |review|
-      if @listener.id == review.user_id
+      if @listener.id == review.listener_id
         review.destroy
       end
     end
@@ -66,8 +61,7 @@ class ListenersController < ApplicationController
 
 
   private
-
-  def user_params
+  def listener_params
     params.require(:listener).permit(:first_name, :last_name, :user_name, :password, :password_confirmation, :picture)
   end
 end

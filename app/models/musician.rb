@@ -2,7 +2,7 @@ class Musician < ApplicationRecord
   has_many :musiciangenres
   has_many :genres, through: :musiciangenres
   has_many :reviews
-  has_many :users, through: :review
+  has_many :listeners, through: :reviews
 
   validates :name, presence: true
   validates :bio, presence: true
@@ -37,6 +37,14 @@ class Musician < ApplicationRecord
       recent_reviews = reviews
     end
     recent_reviews
+  end
+
+  def image_uploader(image)
+    byebug
+    if !image.nil?
+      pic = Cloudinary::Uploader.upload(image)
+      self.image = pic['url']
+    end
   end
 
   def self.search(search)

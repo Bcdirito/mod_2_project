@@ -1,5 +1,11 @@
 <h1><%= @musician.name  %></h1>
 
+<% if @musician.image.nil? %>
+  <%= image_tag "/assets/musician_image.jpeg" %>
+<% else %>
+  <%= image_tag(@musician.picture) %>
+<% end %>
+
 <h3>Genres:</h3>
 <ul>
   <% @genres.each do |genre|%>

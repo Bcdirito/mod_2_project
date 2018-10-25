@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
+  before_action :listener_logged, only: [:new, :create, :edit, :update, :delete]
+
     def index
-      byebug
       if !session[:musician_id].nil?
         @reviews = Review.all.select {|rev| rev.musician_id == session[:musician_id]}
       elsif !session[:listener_id].nil?
@@ -13,12 +14,11 @@ class ReviewsController < ApplicationController
     end
 
     def show
-      byebug
       if Review.count == 0
         redirect_to musicians_path
         flash[:message] = "No Reviews."
         return
-      elsif params[:id].to_i == 0 || params[:id] > Review.last.id
+      elsif params[:id].to_i == 0 || params[:id].to_i > Review.last.id
         redirect_to musicians_path
         flash[:message] = "No Review with that id."
         return
@@ -37,9 +37,13 @@ class ReviewsController < ApplicationController
 
     def create
       @review = Review.new(review_params)
-      @review.user_id = session[:user_id]
-      @review.save
-      redirect_to review_path(@review)
+      @review.listener_id = session[:listener_id]
+      if @review.valid?
+        @review.save
+        redirect_to review_path(@review)
+      else
+        render :new
+      end
     end
 
     def edit
@@ -49,20 +53,20 @@ class ReviewsController < ApplicationController
 
     def update
       @review = Review.find(params[:id])
-      @review.update(user_params)
+      @review.update(review_params)
       redirect_to review_path(@review)
     end
 
     def destroy
       @review = Review.find(params[:id])
-      @user = @review.user_id
+      @listener = @review.listener_id
       @review.destroy
-      redirect_to user_path(@user)
+      redirect_to listener_path(@listener)
     end
 
   private
 
     def review_params
-      params.require(:review).permit(:rating, :user_id, :musician_id, :content)
+      params.require(:review).permit(:rating, :listener_id, :musician_id, :content)
     end
   end

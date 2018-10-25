@@ -31,10 +31,11 @@ class MusiciansController < ApplicationController
     @musician = Musician.new(musician_params)
     @genres = params[:musician][:genre]
     @genres.shift
+    @musician.image_uploader(params[:musician][:image])
 
     if @musician.valid?
       @musician.save
-      log_in_musician
+      log_in_musician(@musician)
       if !@genres.empty?
         @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
       end
@@ -83,11 +84,5 @@ class MusiciansController < ApplicationController
 
   def musician_params
     params.require(:musician).permit(:name, :genre_ids, :band_members, :bio, :image, :rate, :search)
-  end
-
-  def id_checker(id)
-    if id.to_i == 0 || id.to_i > Musician.last.id
-      return true
-    end
   end
 end
