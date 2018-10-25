@@ -1,0 +1,7 @@
+<h1>Welcome <%= @listener.user_name.titleize %> !</h1>
+<h3> Name: <%= "#{@listener.first_name} #{@listener.last_name}" %> </h3>
+
+<%= image_tag(@listener.picture) %>
+
+<%= button_to "See Your Reviews", reviews_path, method: "get" %>
+<%= button_to "Log Out", "/logout", method: "delete" %>

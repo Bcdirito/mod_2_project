@@ -11,5 +11,8 @@
   </ul>
  <% else %>
   <%= "No Reviews Yet! Be the first to review!" %>
+<% end %>
+
+ <% if session[:musician_id].nil? %>
   <%= button_to "Create New Review", new_review_path, method: "create" %>
 <% end %>

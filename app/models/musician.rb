@@ -7,6 +7,14 @@ class Musician < ApplicationRecord
   validates :name, presence: true
   validates :bio, presence: true
 
+  has_secure_password
+  
+  def new
+  end
+
+  def password=(value)
+    self.password_digest = BCrypt::Password.create(value)
+  end
 
   def average_rating
     if self.reviews.count == 0

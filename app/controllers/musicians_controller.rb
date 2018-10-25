@@ -1,7 +1,10 @@
 class MusiciansController < ApplicationController
-
   def index
     @musicians = Musician.search(params[:search])
+    if @musicians.count == 1
+      redirect_to musician_path(@musicians.first.id)
+      return
+    end
   end
 
   def new
@@ -29,6 +32,7 @@ class MusiciansController < ApplicationController
 
     if @musician.valid?
       @musician.save
+      log_in_musician
       if !@genres.empty?
         @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
       end
@@ -40,7 +44,7 @@ class MusiciansController < ApplicationController
   end
 
   def edit
-    @musician = Musician.find(params[:id])
+    @musician = Musician.find(session[:musician_id])
     @genres = Genre.all
   end
 

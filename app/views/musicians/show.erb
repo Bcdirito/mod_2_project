@@ -7,7 +7,7 @@
   <% end %>
 </ul>
 
-<% if !@musician.band_members.empty? %>
+<% if !@musician.band_members.nil? %>
   <ul>
     <% byebug %>
     <% @musician.band_members.each do |member|%>

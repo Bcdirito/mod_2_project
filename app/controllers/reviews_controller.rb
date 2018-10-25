@@ -1,7 +1,11 @@
 class ReviewsController < ApplicationController
     def index
-      @reviews = Review.rev_search(session[:review_class], session[:review_id])
-      if session[:review_class] != "musician" && session[:review_id].nil?
+      byebug
+      if !session[:musician_id].nil?
+        @reviews = Review.all.select {|rev| rev.musician_id == session[:musician_id]}
+      elsif !session[:listener_id].nil?
+        @reviews = Review.all.select {|rev| rev.listener_id == session[:listener_id]}
+      else
         redirect_to musicians_path
         flash[:message] = "Please Vist a musician to see reviews"
         return
@@ -9,7 +13,18 @@ class ReviewsController < ApplicationController
     end
 
     def show
-      @review = Review.find(params[:id])
+      byebug
+      if Review.count == 0
+        redirect_to musicians_path
+        flash[:message] = "No Reviews."
+        return
+      elsif params[:id].to_i == 0 || params[:id] > Review.last.id
+        redirect_to musicians_path
+        flash[:message] = "No Review with that id."
+        return
+      else
+        @review = Review.find(params[:id])
+      end
     end
 
     def new

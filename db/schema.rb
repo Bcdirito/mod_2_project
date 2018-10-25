@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 2018_10_22_181019) do
     t.string "name"
   end
 
+  create_table "listeners", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "user_name"
+    t.string "password_digest"
+    t.string "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "musician_genres", force: :cascade do |t|
     t.integer "musician_id"
     t.integer "genre_id"
@@ -25,6 +35,8 @@ ActiveRecord::Schema.define(version: 2018_10_22_181019) do
 
   create_table "musicians", force: :cascade do |t|
     t.string "name"
+    t.string "user_name"
+    t.string "password_digest"
     t.string "genre"
     t.string "band_members"
     t.string "bio"
@@ -35,24 +47,14 @@ ActiveRecord::Schema.define(version: 2018_10_22_181019) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "listener_id"
     t.integer "musician_id"
     t.integer "rating"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["listener_id"], name: "index_reviews_on_listener_id"
     t.index ["musician_id"], name: "index_reviews_on_musician_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "user_name"
-    t.string "password_digest"
-    t.string "picture"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
