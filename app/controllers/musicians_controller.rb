@@ -1,5 +1,6 @@
 class MusiciansController < ApplicationController
   before_action :musician_logged, only: [:edit, :update]
+  before_action :log_out, only: [:new]
 
   def index
     @musicians = Musician.search(params[:search])
@@ -22,25 +23,39 @@ class MusiciansController < ApplicationController
     end
     @musician = Musician.find(params[:id])
     review_info(@musician)
-    @genres = MusicianGenre.all.select {|genre| @musician.id = genre.musician_id}
-    @genres = @genres.map {|genre| Genre.find(genre.genre_id).name}
+    if !@musician.band_members.nil?
+      @split_members = @musician.band_members.split(",")
+    end
+
+    if !@musician.links.nil?
+      @links = @musician.links.split(",")
+    end
+    # @genres = MusicianGenre.all.select {|genre| @musician.id = genre.musician_id}
+    # @genres = @genres.map {|genre| Genre.find(genre.genre_id).name}
     @reviews = @musician.recent_reviews
   end
 
   def create
+    if params[:musician][:password] != params[:musician][:password_confirmation]
+      flash[:message] = "Password did not match confirmation"
+      render :new
+      return
+    end
+
+
     @musician = Musician.new(musician_params)
-    @genres = params[:musician][:genre]
-    @genres.shift
+
+
+    @musician.genre_id = params[:musician][:genre_id].to_i
     @musician.image_uploader(params[:musician][:image])
 
     if @musician.valid?
       @musician.save
       log_in_musician(@musician)
-      if !@genres.empty?
-        @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
-      end
       redirect_to musician_path(@musician)
     else
+      @errors = @musician.errors.full_messages
+      @genres = Genre.all
       render :new
     end
 
@@ -53,22 +68,16 @@ class MusiciansController < ApplicationController
 
   def update
     @musician = Musician.find(session[:musician_id])
-    @genres = params[:musician][:genre]
-    @genres.shift
+    @musician.genre_id = params[:musician][:genre_id].to_i
 
     if !params[:musician][:image].nil?
       @musician.image_uploader(params[:musician][:image])
     end
 
-    @musgens = MusicianGenre.where(musician_id: @musician.id)
-    @musgens.delete_all
-
     if @musician.update(musician_params)
-      if !@genres.empty?
-        @genres.each {|genre| MusicianGenre.create(musician_id: @musician.id, genre_id: Genre.find(genre.to_i).id)}
-      end
       redirect_to musician_path(@musician)
     else
+      @errors = @musician.errors.full_messages
       render :edit
     end
   end
@@ -87,6 +96,6 @@ class MusiciansController < ApplicationController
   private
 
   def musician_params
-    params.require(:musician).permit(:name, :genre_ids, :band_members, :bio, :image, :rate, :search)
+    params.require(:musician).permit(:name, :genre, :band_members, :bio, :image, :rate, :search, :user_name, :song, :links, :password, :password_confirmation)
   end
 end

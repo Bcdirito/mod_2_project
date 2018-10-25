@@ -6,25 +6,29 @@
   <%= image_tag(@musician.picture) %>
 <% end %>
 
-<h3>Genres:</h3>
-<ul>
-  <% @genres.each do |genre|%>
-    <li><%= genre  %></li>
-  <% end %>
-</ul>
+<h3>Genre: <%= Genre.find(@musician.genre_id).name %></h3>
 
-<% if !@musician.band_members.nil? %>
+<% if !@split_members.nil? %>
   <ul>
-    <% byebug %>
-    <% @musician.band_members.each do |member|%>
-    <%= member %>
-  </ul>
+  <% @split_members.each do |member| %>
+    <li><%= member %></li>
   <% end %>
+  </ul>
 <% end %>
 
 <h3>Avg. Rating <%= @musician.average_rating %></h3>
 
 <p><%= @musician.bio %></p>
+
+<% if !@links.nil? %>
+  <ul>
+    <% @links.each do |link| %>
+      <li> <%= link_to "SoundCloud", link %> </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/513422901&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 
 <h3>Recent Reviews:</h3>
 <%= render partial: "reviews/recent_reviews", locals: {reviews: @reviews} %>

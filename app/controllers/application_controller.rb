@@ -8,6 +8,18 @@ class ApplicationController < ActionController::Base
   def signup
   end
 
+  def profile_path
+    if !session[:listener_id].nil?
+      redirect_to listener_path(session[:listener_id])
+      return
+    elsif !session[:musician_id].nil?
+      redirect_to musician_path(session[:musician_id])
+      return
+    else
+      redirect_to "/login"
+    end
+  end
+
   private
   def log_in_listener(listener)
     session[:listener_id] = listener.id

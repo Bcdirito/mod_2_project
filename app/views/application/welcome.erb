@@ -1,4 +1,9 @@
 <%= form_tag(musicians_path, method: :get) do %>
   <%= text_field_tag(:search, params[:search]) %>
   <%= submit_tag ("Search") %>
-  <% end %>
+  <% end %><br></br>
+
+<br></br>
+<br></br>
+  <%= button_to "Signup", signup_path, method: "get" %>
+  <%= button_to "Signup", login_path, method: "get" %>

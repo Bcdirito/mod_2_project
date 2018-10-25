@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :musicians
   resources :listeners, only: [:new, :create, :update, :edit, :destroy, :show]
   resources :reviews
+  get "/profile_path", to: "application#profile_path"
   get "/login", to: "sessions#login"
   get "/login_listener", to: "sessions#new_listener"
   post "/login_listener", to: "sessions#create_listener"

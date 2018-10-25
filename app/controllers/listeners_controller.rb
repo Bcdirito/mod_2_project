@@ -17,7 +17,7 @@ class ListenersController < ApplicationController
   def create
     if params[:listener][:password] != params[:listener][:password_confirmation]
       flash[:message] = "Password did not match confirmation"
-      redirect_to new_listener_path
+      render :new
       return
     end
 
@@ -39,7 +39,6 @@ class ListenersController < ApplicationController
 
   def update
     @listener = Listener.find(params[:id])
-    byebug
     if !params[:listener][:picture].nil?
       img = Cloudinary::Uploader.upload(params[:listener][:picture])
       @listener.picture = img['url']
