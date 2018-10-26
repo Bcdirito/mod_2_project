@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class Musician < ApplicationRecord
   has_many :reviews
   has_many :listeners, through: :reviews
@@ -13,6 +15,12 @@ class Musician < ApplicationRecord
 
   def password=(value)
     self.password_digest = BCrypt::Password.create(value)
+  end
+
+  def authenticate(plaintext_password)
+    if !self.password_digest.nil?
+      BCrypt::Password.new(self.password_digest) == plaintext_password
+    end
   end
 
   def average_rating

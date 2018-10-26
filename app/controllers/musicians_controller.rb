@@ -7,6 +7,9 @@ class MusiciansController < ApplicationController
     if @musicians.count == 1
       redirect_to musician_path(@musicians.first.id)
       return
+    else
+      render :index
+      flash[:message] = "No Musician by that name."
     end
   end
 

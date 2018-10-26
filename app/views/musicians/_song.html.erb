@@ -27,12 +27,5 @@
     <% end %>
   <% end %>
 </ul>
-<% if !@musician.song.nil? %>
-  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src=<%= "#{@@musician.song}"%>></iframe>
-  <% else %>
-  <h3> <%= "Please link song from SoundCloud!" %> </h3>
-<% end %>
 
-<h3>Recent Reviews:</h3>
-<%= render partial: "reviews/recent_reviews", locals: {reviews: @reviews} %>
-<%= button_to "See All Reviews", reviews_path, method: "get" %>
+<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="<%= #{@musician.song}"></iframe>

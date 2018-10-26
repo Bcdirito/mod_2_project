@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :invalid_url
-
+  
   def welcome
     render :layout => "welcome"
   end

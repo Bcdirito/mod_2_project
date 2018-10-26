@@ -1,19 +1,35 @@
-<% if !session[:musician_id].nil? %>
+<% if !session[:musician_id].nil? || request.headers["HTTP_REFERER"].include?("musicians")%>
   <% if !@reviews.empty? %>
-      <%= render partial: "reviews/musician_reviews", locals: {musician_reviews: @reviews} %>
-  <% else %>
-      No Reviews for this Artist yet.
+    <% @reviews = Review.all.select {|rev| rev.musician_id == request.headers["HTTP_REFERER"].last.to_i} %>
+    <% byebug %>
+    <%= render partial: "reviews/musician_reviews", locals: {musician_reviews: @reviews} %>
+    <% else %>
+    No Reviews for this Artist yet.
+    <% end %>
   <% end %>
+
+<% if !session[:listener_id].nil? && request.headers["HTTP_REFERER"].include?("musicians") %>
+  <% if !@reviews.empty? %>
+  <% @reviews = Review.all.select {|rev| rev.musician_id == request.headers["HTTP_REFERER"].last.to_i} %>
+    <%= render partial: "reviews/musician_reviews", locals: {musician_reviews: @reviews}  %>
+    <% else %>
+    <%= "No Reviews for this Musician yet." %>
+    <% end %>
 <% end %>
 
-<% if !session[:listener_id].nil? %>
+<% if !session[:listener_id].nil? && !request.headers["HTTP_REFERER"].include?("musicians") %>
   <% if !@reviews.empty? %>
-    <%= render partial: "reviews/user_reviews", locals: {user_reviews: @reviews}  %>
-  <% else %>
+    <%= render partial: "reviews/user_reviews", locals: {listener_reviews: @reviews}  %>
+    <% else %>
     <%= "No Reviews by this Listener yet." %>
-  <% end %>
+    <% end %>
 <% end %>
+
 
 <% if session[:musician_id].nil? %>
   <%= button_to "Write New Review", new_review_path, method: "get" %>
 <% end %>
+<!-- jQuery first, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js"></script>

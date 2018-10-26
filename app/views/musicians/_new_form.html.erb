@@ -1,0 +1,75 @@
+<%= form_for musician do |f| %>
+<div class="form-row">
+  <div class="col">
+    <!-- Material input -->
+    <div class="md-form mt-0">
+      <%= f. text_field :name, class: 'form-control', placeholder: "Band Name" %>
+    </div>
+  </div>
+  <div class="col">
+    <!-- Material input -->
+    <div class="md-form mt-0">
+      <%= f.text_field :user_name, class: 'form-control', placeholder: "User Name" %>
+    </div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col">
+    <!-- Material input -->
+    <div class="md-form mt-0">
+      <%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+    </div>
+  </div>
+  <div class="col">
+    <!-- Material input -->
+    <div class="md-form mt-0">
+      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Password" %>
+    </div>
+  </div>
+</div>
+<div class="md-form mt-0">
+  <%= f.text_field :band_members, class: 'form-control', placeholder: "Band Members (Separate with Commas)" %>
+</div>
+</div>
+<div class="md-form mt-0">
+  <%= f. text_area :bio, class: 'form-control', placeholder: "Band Bio" %>
+</div>
+<div class="form-row">
+  <div class="col">
+    <!-- Material input -->
+    <div class="md-form mt-0">
+      <%= f.text_field :song, class: 'form-control', placeholder: "SoundCloud Link (Directions Found Below)" %>
+    </div>
+  </div>
+  <div class="col">
+    <!-- Material input -->
+    <div class="md-form mt-0">
+      <%= f.file_field :image, class: 'form-control', placeholder: "Profile Image" %>
+    </div>
+  </div>
+</div>
+<div class="md-form mt-0">
+  <%= f.text_field :links, class: 'form-control', placeholder: "Links (Separate with Comma)" %>
+</div>
+
+<div class="custom-control">
+  <%= f.collection_select :genre_id, @genres, :id, :name %>
+</div>
+<%= f.submit "Create New Musician", class: "btn btn-primary" %>
+<% end %>
+
+<style>
+.directions {
+  text-align: center;
+}
+</style>
+
+ <div class="directions">
+   <ol>
+     Copying The SoundCloud Link
+     <li>Go to the Song Page</li>
+     <li>Click Share</li>
+     <li>Click Embed</li>
+     <li>In the embed link, copy the HTML link found in quotes</li>
+   </ol>
+  </div>

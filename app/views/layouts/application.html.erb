@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>High Note</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/css/bootstrap-material-design.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
@@ -22,7 +26,7 @@
 <body>
 
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark secondary-color-dark">
+  <nav class="navbar navbar-expand-lg">
 
     <!-- Navbar brand -->
     <a class="navbar-brand" href="/">HighNote</a>
@@ -37,11 +41,8 @@
     <div class="collapse navbar-collapse" id="basicExampleNav">
 
       <!-- Links -->
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto navbar-expand">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home
-            <span class="sr-only">(current)</span>
-          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/musicians/index">Musicians</a>
@@ -49,17 +50,59 @@
         <li class="nav-item">
           <a class="nav-link" href="/reviews/new">Write A Review</a>
         </li>
-
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="true">Your Profile</a>
-          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/login">Login</a>
-            <a class="dropdown-item" href="/users/new">Register</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
         </li>
 
+        <!-- Dropdown -->
+        <style>
+       .dropbtn {
+           background-color: ##ffffff;
+           color: rgb(204, 74, 225)
+           padding: 5px;
+           font-size: 16px;
+           border: none;
+           cursor: pointer;
+       }
+
+       .dropdown {
+           position: relative;
+           display: inline-block;
+       }
+
+       .dropdown-content {
+           display: none;
+           position: absolute;
+           background-color: #ffffff;
+           min-width: 160px;
+           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+           z-index: 1;
+       }
+
+       .dropdown-content a {
+           color: black;
+           padding: 12px 16px;
+           text-decoration: none;
+           display: block;
+       }
+
+       .dropdown-content a:hover {background-color: #5696ff}
+
+       .dropdown:hover .dropdown-content {
+           display: block;
+       }
+
+       .dropdown:hover .dropbtn {
+           background-color: ##ffffff;
+       }
+       body {
+         background-image: url("https://images.pexels.com/photos/144429/pexels-photo-144429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+         background-size: cover;
+         position: relative;
+       }
+     </style>
+    
+        </li>
       </ul>
       <br>
       <!-- Material unchecked -->
@@ -69,10 +112,17 @@
 
       <form class="form-inline">
         <div class="md-form my-0">
+          <% form_tag(musicians_path, method: :get, class: 'form-inline') do %>
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <% text_field_tag :search, params[:search], class: 'form' %>
+          <% end %>
         </div>
       </form>
     </div>
+  <%= form_tag(musicians_path, method: :get, class: 'form-inline') do %>
+<%= text_field_tag :search, params[:search], class: 'form', placeholder: 'Search'  %>
+<%= submit_tag "Search", class: 'btn btn-default', color: "pink", :name => nil %>
+<% end %>
     <!-- Collapsible content -->
 
   </nav>
@@ -84,13 +134,9 @@
 <!-- Material form row -->
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+ 	<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js"></script>
+ 	<script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js"></script>
 </body>
 
 </html>
