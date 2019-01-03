@@ -18,7 +18,7 @@ class Musician < ApplicationRecord
   end
 
   def authenticate(plaintext_password)
-    if !self.password_digest.nil?
+    if !self.id.nil?
       BCrypt::Password.new(self.password_digest) == plaintext_password
     end
   end
@@ -27,6 +27,9 @@ class Musician < ApplicationRecord
     if self.reviews.count == 0
       self.rate
     else
+      if self.rate == nil
+        self.rate = 0
+      end
       self.reviews.each {|review| self.rate += review.rating}
       self.rate = self.rate / self.reviews.count
     end

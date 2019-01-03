@@ -1,9 +1,15 @@
-<h1><%= @musician.name  %></h1>
+<style>
 
+body {
+  color: white;
+  align: center;
+}
+</style>
+<h1><%= @musician.name  %></h1>
 <% if @musician.image.nil? %>
   <%= image_tag "/assets/musician_image.jpeg" %>
 <% else %>
-  <%= image_tag(@musician.picture) %>
+  <%= image_tag("#{@musician.image}") %>
 <% end %>
 
 <h3>Genre: <%= Genre.find(@musician.genre_id).name %></h3>
@@ -18,8 +24,25 @@
 
 <h3>Avg. Rating <%= @musician.average_rating %></h3>
 
-<p><%= @musician.bio %></p>
 
+  <style>
+   div {
+      color: violet;
+      width: 300px;
+      length: 300px;
+      border-radius: 8px;
+  }
+
+  div.first {
+    background: rgba(76, 70, 80, 0.7);
+  }
+  </style>
+  <div class="first">
+<h3>Bio:</h3>
+<p><%= @musician.bio %></p>
+</div>
+<div class="first">
+<h1>Links</h1>
 <% if !@links.nil? %>
   <ul>
     <% @links.each do |link| %>
@@ -27,12 +50,30 @@
     <% end %>
   <% end %>
 </ul>
+</div>
 <% if !@musician.song.nil? %>
-  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src=<%= "#{@@musician.song}"%>></iframe>
-  <% else %>
-  <h3> <%= "Please link song from SoundCloud!" %> </h3>
+  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src=<%= "#{@musician.song}"%>></iframe>
 <% end %>
+<style>
+ div {
+    color: violet;
+    width: 350px;
+    length: 300px;
+    border-radius: 8px;
+}
+
+div.first {
+  background: rgba(76, 70, 80, 0.7);
+}
+</style>
 
 <h3>Recent Reviews:</h3>
+<div class="first">
 <%= render partial: "reviews/recent_reviews", locals: {reviews: @reviews} %>
-<%= button_to "See All Reviews", reviews_path, method: "get" %>
+<%= button_to "See All Reviews", reviews_path, method: "get", class: 'btn btn-secondary' %>
+</div>
+
+<% if !session[:musician_id].nil? %>
+  <%= button_to "Edit Profile", edit_musician_path(@musician), method: "get", class: 'btn btn-secondary' %>
+  <%= button_to "Log Out", "/logout", method: "delete", class: 'btn btn-secondary' %>
+<% end %>

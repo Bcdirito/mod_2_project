@@ -1,6 +1,13 @@
+<style>
+body {
+  color: white;
+}
+</style>
+<body>
 <h1> Review for <%= @review.musician.name %> by <%= @review.listener.user_name %></h1>
 
 <h3>Rating: <%= @review.rating %></h3>
 <%= @review.content %>
 
-<%= link_to "Delete Review", @review, method: "delete" %>
+<%= link_to "Delete Review", @review, method: "delete", class: 'btn btn-secondary' %>
+</body>

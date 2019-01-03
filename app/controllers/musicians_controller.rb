@@ -9,7 +9,6 @@ class MusiciansController < ApplicationController
       return
     else
       render :index
-      flash[:message] = "No Musician by that name."
     end
   end
 
@@ -41,6 +40,7 @@ class MusiciansController < ApplicationController
   def create
     if params[:musician][:password] != params[:musician][:password_confirmation]
       flash[:message] = "Password did not match confirmation"
+      @musician = Musician.new
       render :new
       return
     end

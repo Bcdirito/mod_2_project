@@ -1,7 +1,9 @@
 <ul>
   <% listener_reviews.each do |review| %>
     <h4>For: <%= link_to "#{review.musician.name}", musician_path(review.musician)%> <%=" - #{review.rating}/5"%></h4>
-    <li><%= review.content %><br></br></li>
-    <%= button_to "Edit Review", edit_review_path(review), method: "get" %>
+    <% if !review.content.empty? %>
+      <li><%= review.content %><br></br></li>
+    <% end %>
+    <%= button_to "Edit Review", edit_review_path(review), method: "get", class: 'btn btn-secondary' %>
   <% end %>
 </ul>

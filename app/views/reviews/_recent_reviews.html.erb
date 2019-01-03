@@ -4,7 +4,7 @@
     By: <%= "#{review.listener.user_name} - #{review.rating}/5"%>
   <% if review.content.length > 50 %>
     <li><%= "#{review.content[0..50]}..." %><br></br></li>
-    <% else %>
+    <% elsif !review.content.empty? %>
     <li><%= review.content %><br></br></li>
     <% end %>
   <% end %>
@@ -14,5 +14,5 @@
 <% end %>
 
  <% if session[:musician_id].nil? %>
-  <%= button_to "Create New Review", new_review_path, method: "get" %>
+  <%= button_to "Create New Review", new_review_path, method: "get", class: 'btn btn-secondary' %>
 <% end %>

@@ -17,6 +17,7 @@ class ListenersController < ApplicationController
   def create
     if params[:listener][:password] != params[:listener][:password_confirmation]
       flash[:message] = "Password did not match confirmation"
+      @listener = Listener.new
       render :new
       return
     end

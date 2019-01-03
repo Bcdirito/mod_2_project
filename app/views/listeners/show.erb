@@ -8,8 +8,8 @@
   <%= image_tag(@listener.picture) %>
 <% end %>
 
-<%= button_to "See Your Reviews", reviews_path, method: "get" %>
-<%= button_to "Log Out", "/logout", method: "delete" %>
+<%= button_to "See Your Reviews", reviews_path, method: "get", class: 'btn btn-secondary' %>
+<%= button_to "Log Out", "/logout", method: "delete", class: 'btn btn-secondary' %>
 
 <style media="screen">
 

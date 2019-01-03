@@ -1,1 +1,9 @@
-<%= render partial: "form", locals: {listener: @listener} %>
+<style>
+body {
+  color: white;
+  text-align: center;
+}
+</style>
+<h1> Create New Listener Account </h1>
+
+<%= render partial: "listeners/form", locals: {listener: @listener} %>

@@ -1,6 +1,19 @@
-<% if !flash[:message].nil? %>
-  <%= flash[:message] %>
-<% end %>
+<style>
 
-<%= button_to "Listener Login", "/login_listener", method: "get" %>
-<%= button_to "Musician Login", "/login_musician", method: "get" %>
+
+  body {
+    text-align: center;
+  }
+  h3 {
+    color: white;
+
+    border: 5px solid white;
+
+  }
+</style>
+<body>
+
+
+<%= button_to "Listener Login", "/login_listener", method: "get", class: 'btn btn-secondary' %>
+<%= button_to "Musician Login", "/login_musician", method: "get", class: 'btn btn-secondary' %>
+</body>

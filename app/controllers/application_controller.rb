@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :invalid_url
-  
+
   def welcome
     render :layout => "welcome"
   end
@@ -61,6 +61,9 @@ class ApplicationController < ActionController::Base
 
 
   def review_info(profile)
+    if profile.class == Musician
+      session[:review_type] = "musician"
+    end
     session[:review_id] = profile.id
   end
 

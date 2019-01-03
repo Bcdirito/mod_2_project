@@ -55,16 +55,33 @@
 <div class="custom-control">
   <%= f.collection_select :genre_id, @genres, :id, :name %>
 </div>
-<%= f.submit "Create New Musician", class: "btn btn-primary" %>
+<%= f.submit "Create New Musician", class: "btn btn-secondary" %>
 <% end %>
 
 <style>
+.input {
+  color: #ffffff;
+}
 .directions {
   text-align: center;
 }
+.form-control {
+  color: #ffffff;
+}
 </style>
 
+<style>
+.container {
+  max-width: 500px !important;
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+}
+
+</style>
+<body>
  <div class="directions">
+   <div class="container">
    <ol>
      Copying The SoundCloud Link
      <li>Go to the Song Page</li>
@@ -72,4 +89,6 @@
      <li>Click Embed</li>
      <li>In the embed link, copy the HTML link found in quotes</li>
    </ol>
-  </div>
+ </div>
+</div>
+</body>

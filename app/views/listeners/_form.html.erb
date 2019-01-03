@@ -1,8 +1,3 @@
-<% if flash[:message] %>
- <strong><%= flash[:message] %></strong>
-<% end %>
-
-
 
 <center><div class="col-md-5">
 <%= form_for listener do |f| %>
@@ -36,7 +31,7 @@
                    <center><div class="white-color" <%= f.label :image_url, "Upload Pic" %>
                       <%= f.file_field :picture%>
                    </div></center>
-                   <center><%= f.button :submit, :class => 'listener_create'  %></center>
+                   <center><%= f.button "Submit", :class => 'listener_create', class: "btn btn-secondary"  %></center>
                </div>
 
    </div>

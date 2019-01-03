@@ -1,17 +1,23 @@
+<style>
+
+body {
+  color: white;
+  text-align: center;
+}
+</style>
 <h1>Login Listener</h1>
 
-<% if !flash[:message].nil? %>
-  <strong><%= flash[:message] %></strong>
-<% end %>
+
 
 <%= form_with url: "/login_listener" do |f| %>
   <% if !flash[:message].nil? %>
     <strong><%= flash[:message] %></strong>
   <% end %>
+  <br>
   <%= f.label :username %>
   <%= f.text_field :username, :autocomplete => :off %>
 
   <%= f.label :password %>
   <%= f.password_field :password, :autocomplete => :off %>
-  <%= f.submit "Login" %>
+  <%= f.submit "Login", class: 'btn btn-secondary' %>
 <% end %>

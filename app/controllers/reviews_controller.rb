@@ -6,6 +6,8 @@ class ReviewsController < ApplicationController
         @reviews = Review.all.select {|rev| rev.musician_id == session[:musician_id]}
       elsif !session[:listener_id].nil?
         @reviews = Review.all.select {|rev| rev.listener_id == session[:listener_id]}
+      elsif session[:review_type] == "musician"
+        @reviews = Review.all.select {|rev| rev.musician_id == session[:review_id]}
       else
         redirect_to musicians_path
         flash[:message] = "Please Vist a musician to see reviews"

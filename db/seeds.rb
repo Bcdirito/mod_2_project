@@ -25,16 +25,4 @@ Listener.create(first_name: "Rajvir", last_name: "Rai", user_name: "rajr", passw
 Listener.create(first_name: "Prince", last_name: "Wilson", user_name: "princew", password_digest: BCrypt::Password.create("password"), picture: nil )
 Listener.create(first_name: "Arren", last_name: "Alexander", user_name: "arrena", password_digest: BCrypt::Password.create("password"), picture: nil )
 
-Musician.new(name: "Brian Detlefs", genre_id: Genre.find_by(name: "Singer/Songwriter").id, user_name: "bdetlefs", password_digest: BCrypt::Password.create("password"), band_members: nil, bio: "Singer/Songwriter from Seattle. Loves Prince.", image: nil, rate: 0.0, links: nil, song: nil)
-Musician.create(name: "Anthony Pagano", genre_id: Genre.find_by(name: "Singer/Songwriter").id, user_name: "apagano", password_digest: BCrypt::Password.create("password"), band_members: nil, bio: "Singer/Songwriter from Florida. Loves John Mayer", image: nil, rate: 4.3, links: nil, song: nil)
-Musician.create(name: "That Band", genre_id: Genre.find_by(name: "Pop").id, user_name: "thatband", password_digest: BCrypt::Password.create("password"), band_members: "Some Guy 1, Some Guy 2, Some Girl 1, Some Girl 2", bio: "Singer/Songwriter from Illinois. Loves Scissor Sisters.", image: nil, rate: 3.5, links: nil, song: nil)
-Musician.create(name: "Catherine Greenfield", genre_id: Genre.find_by(name: "Folk").id, user_name: "cgreenfield", password_digest: BCrypt::Password.create("password"), band_members: nil, bio: "Singer/Songwriter from Seattle. Loves Folk.", image: nil, rate: 2.7, links: nil, song: nil)
-Musician.create(name: "John Arthur Greene", genre_id: Genre.find_by(name: "Rock").id, user_name: "jag", password_digest: BCrypt::Password.create("password"), band_members: nil, bio: "Singer/Songwriter from Seattle. Loves Prince.", image: nil, rate: 5.0, links: nil, song: nil)
-
-Review.create(listener_id: Listener.first.id, musician_id: Musician.second.id, rating: 4, content: "KILLLLLLLLLLEEEEEEEEDDDDDDD ITTTTTTTTT")
-Review.create(listener_id: Listener.second.id, musician_id: Musician.first.id, rating: 5, content: "KILLLLLLLLLLEEEEEEEEDDDDDDD ITTTTTTTTT")
-Review.create(listener_id: Listener.first.id, musician_id: Musician.second.id, rating: 5, content: "KILLLLLLLLLLEEEEEEEEDDDDDDD ITTTTTTTTT")
-Review.create(listener_id: Listener.last.id, musician_id: Musician.last.id, rating: 2, content: "KILLLLLLLLLLEEEEEEEEDDDDDDD ITTTTTTTTT")
-Review.create(listener_id: Listener.third.id, musician_id: Musician.third.id, rating: 1, content: "KILLLLLLLLLLEEEEEEEEDDDDDDD ITTTTTTTTT")
-
 puts "Done!"

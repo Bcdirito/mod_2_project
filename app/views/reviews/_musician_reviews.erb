@@ -1,6 +1,8 @@
 <ul>
   <% musician_reviews.each do |review| %>
     <h4>By: <%= "#{review.listener.user_name} - #{review.rating}/5"%></h4>
-    <li><%= review.content %><br></br></li>
+    <% if !review.content.empty? %>
+      <li><%= review.content %><br></br></li>
+    <% end %>
   <% end %>
 </ul>

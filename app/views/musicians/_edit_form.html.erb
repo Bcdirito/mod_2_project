@@ -29,11 +29,6 @@
   </div>
   <div class="col">
     <!-- Material input -->
-    <div class="md-form mt-0">
-      <%= f.file_field :image, class: 'form-control', placeholder: "Profile Image" %>
-    </div>
-  </div>
-</div>
 <div class="md-form mt-0">
   <%= f.text_field :links, class: 'form-control', placeholder: "Links (Separate with Comma)" %>
 </div>
@@ -41,18 +36,25 @@
 <div class="custom-control">
   <%= f.collection_select :genre_id, @genres, :id, :name %>
 </div>
-<%= f.submit "Update New Musician", class: "btn btn-primary", method: "Update" %>
+<%= f.submit "Update Musician", class: 'btn btn-secondary', method: "Update" %>
 <% end %>
 
-<%= button_to "Delete Profile", @musician, method: "delete" %>
+<%= button_to "Delete Profile", @musician, method: "delete", class: 'btn btn-secondary' %>
 
 <style>
 .directions {
   text-align: center;
 }
 </style>
-
+<style>
+.container {
+  max-width: 500px !important;
+  background-color: white;
+  border-radius: 5px;
+}
+</style>
  <div class="directions">
+   <div class="container">
    <ol>
      Copying The SoundCloud Link
      <li>Go to the Song Page</li>
@@ -60,4 +62,5 @@
      <li>Click Embed</li>
      <li>In the embed link, copy the HTML link found in quotes</li>
    </ol>
-  </div>
+ </div>
+</div>

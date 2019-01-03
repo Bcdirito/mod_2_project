@@ -1,13 +1,24 @@
-<%= form_for review do |f| %>
+<style>
+body {
+  color: white;
+}
+</style>
 
+<%= form_for review do |f| %>
+<div class="form-row">
+  <div class="col">
 <%= f.label :rating %>
 <%= f.select :rating, (1..5)%>
-
+<br>
 <%= f.label :musician %>
 <%= f.collection_select :musician_id, @musicians, :id, :name%>
-
+<div class="md-form mt-0">
 <%= f.label :content %>
+  <div class="md-form mt-0">
 <%= f.text_area :content %>
-
-<%= f.submit %>
+  </div>
+</div>
+</div>
+</div>
+<%= f.submit "Create Review", class: "btn btn-secondary" %>
 <% end %>
